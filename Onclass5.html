@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="add">
+    <button onclick="addInfo()">Add</button>
+    <input type="text" name="" id="edit">
+    <button onclick="changeInfo ()">Edit</button>
+    <!-- <button onclick="showProduct()">Show</button> -->
+    <input type="hidden" name="" id="temp">
+    <div id="table"></div>
+</body>
+<script>
+    // let header = [1,2];
+    let product = ['Letuce','Tomato'];
+    let button1 = ['<button onclick="deleteInfo()">Delete</button>'];
+    let button2 = ['<button onclick="editInfo1()">Edit</button>'];
+    function showProduct () {
+        let table = "<table border='1' width='300' cellspacing='0' cellpadding='3'>"
+            for (i=0;i<product.length;i++) {
+                table = table + "<tr>";
+                    table = table + '<td>' +  product[i] + '</td>';
+                    table = table + '<td>' +  button1[0] + '</td>';
+                    table = table + '<td>' +  button2[0] + '</td>';
+                table = table + "</tr>";
+            }  
+        table = table + "</table>"
+        document.getElementById("table").innerHTML = table;
+    }
+    showProduct ()
+    let addedInfo = document.getElementById("add");
+    function addInfo(){
+        product.push(addedInfo.value);
+        showProduct ();
+    }
+    let editedInfo = document.getElementById("edit");
+    let temp = document.getElementById("temp")
+    function editInfo1 () {
+        for (i=0;i<product.length;i++) {
+            temp.value=product[i];
+            product[i] = editedInfo.value;
+            editedInfo.value = temp.value;
+        }
+    }
+    function changeInfo () {
+        for (i=0;i<product.length;i++) {
+            temp.value=editedInfo.value;
+            editedInfo.value = product[i];
+            product[i] = temp.value;
+            showProduct ();
+        }
+    }
+    function deleteInfo () {
+        for (i=0;i<product.length;i++) {
+            product.splice(i-1,1);
+        }
+        showProduct ();
+    }
+        // addInfo()
+</script>
+</html>
